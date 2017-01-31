@@ -9,7 +9,8 @@ stage('Deploy') {
   env.DEIS_APP = 'mdn-' + env.BRANCH_NAME
 
   sh 'make deis-create'
-  sh "kubectl --namespace=${env.DEIS_APP} apply -f k8s/"
+  // sh "kubectl --namespace=${env.DEIS_APP} apply -f k8s/"
+  // works locally, but jenkins gives error: mapping values are not allowed in theis context
   sh 'make deis-pull'
   sh 'make k8s-migrate'
   sh 'make deis-scale-worker'
