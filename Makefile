@@ -107,9 +107,11 @@ push-kuma:
 push: push-base push-kuma
 
 deis-create:
-	DEIS_PROFILE=${DEIS_PROFILE} ${DEIS_BIN} create ${DEIS_APP} --no-remote && \
-	sleep 5 && ${DEIS_BIN} config:push -p .env-dist -a ${DEIS_APP} || \
+	DEIS_PROFILE=${DEIS_PROFILE} ${DEIS_BIN} create ${DEIS_APP} --no-remote || \
 	${DEIS_BIN} apps | grep -q ${DEIS_APP}
+
+deis-config:
+	DEIS_PROFILE=${DEIS_PROFILE} ${DEIS_BIN} config:push -p .env-dist -a ${DEIS_APP}
 
 deis-pull:
 	DEIS_PROFILE=${DEIS_PROFILE} ${DEIS_BIN} pull ${KUMA_IMAGE} -a ${DEIS_APP}
