@@ -3,7 +3,7 @@ stage('Build & push images') {
 }
 
 stage('Deploy') {
-  env.KUBECONFIG = "${env.HOME}/virginia.kube_config"
+  env.KUBECONFIG = "${env.HOME}/.kube/virginia.kube_config"
   env.DEIS_PROFILE = 'virginia'
   env.DEIS_BIN = 'deis2'
   env.DEIS_APP = 'mdn-' + env.BRANCH_NAME
