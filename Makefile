@@ -40,7 +40,7 @@ compilejsi18n:
 
 collectstatic:
 	@ echo "## Compiling (Sass), collecting, and building static files ##"
-	@ python manage.py collectstatic --noinput
+	@ DEBUG=0 python manage.py collectstatic --noinput
 
 build-static: compilejsi18n collectstatic
 
