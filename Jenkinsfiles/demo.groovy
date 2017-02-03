@@ -9,7 +9,11 @@ stage('Deploy') {
   env.DEIS_APP = 'mdn-' + env.BRANCH_NAME
 
   sh 'make deis-create'
-  sh 'make deis-config'
+  // sh 'make deis-config'
+  // currently broken:
+  // DEIS_PROFILE=virginia deis2 config:push -p .env-dist -a mdn-demo
+  // Creating config... ...o..Error: Unknown Error (409): {"detail":"jenkins changed nothing - release stopped"}
+  // make: *** [deis-config] Error 1
   sh "KUBECONFIG=${env.KUBECONFIG} kubectl --namespace=${env.DEIS_APP} apply -f k8s/"
   sh 'make deis-pull'
   sh 'make k8s-migrate'

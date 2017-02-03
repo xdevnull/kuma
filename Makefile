@@ -18,7 +18,7 @@ DB_PASS ?= kuma # default for ephemeral demo DBs
 target = kuma
 requirements = -r requirements/local.txt
 # set Django settings module if not already set as env var
-export DJANGO_SETTINGS_MODULE ?= kuma.settings.testing
+export DJANGO_SETTINGS_MODULE ?= kuma.settings.prod
 
 # Note: these targets should be run from the kuma vm
 test:
@@ -40,7 +40,7 @@ compilejsi18n:
 
 collectstatic:
 	@ echo "## Compiling (Sass), collecting, and building static files ##"
-	@ DEBUG=0 python manage.py collectstatic --noinput
+	@ python manage.py collectstatic --noinput
 
 build-static: compilejsi18n collectstatic
 
